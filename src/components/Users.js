@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Posts = ({ posts, loading }) => {
+const Users = ({ posts, loading }) => {
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -16,4 +16,4 @@ const Posts = ({ posts, loading }) => {
   );
 };
 
-export default Posts;
+export default Users;

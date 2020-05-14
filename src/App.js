@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import Posts from './components/Posts';
+import Users from './components/Users';
 import Pagination from './components/Pagination';
 import axios from 'axios';
 import './App.css';
 
 const App = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchUsers = async () => {
       setLoading(true);
       const res = await axios.get('https://jsonplaceholder.typicode.com/photos');
-      setPosts(res.data);
+      setUsers(res.data);
       setLoading(false);
     };
 
-    fetchPosts();
+    fetchUsers();
   }, []);
 
   // Get current posts
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const indexOfLastUser = currentPage * postsPerPage;
+  const indexOfFirstUser = indexOfLastUser - postsPerPage;
+  const currentUsers = posts.slice(indexOfFirstUser, indexOfLastUser);
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -32,10 +32,10 @@ const App = () => {
   return (
     <div className='container mt-5'>
       <h1 className='text-primary mb-3'>Users List</h1>
-      <Posts posts={currentPosts} loading={loading} />
+      <Users posts={currentUsers} loading={loading} />
       <Pagination
         postsPerPage={postsPerPage}
-        totalPosts={posts.length}
+        totalUsers={posts.length}
         paginate={paginate}
       />
     </div>
